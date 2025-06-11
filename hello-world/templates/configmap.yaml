@@ -3,4 +3,10 @@ kind: ConfigMap
 metadata:
   name: hello-config
 data:
-  message: "hello-world-1"
+  app.properties: |-
+    appName={{ .Values.config.appName }}
+    appDescription={{ .Values.config.appDescription }}
+    appAuthor={{ .Values.config.appAuthor }}
+    appVersion={{ .Values.config.appVersion }}
+    message={{ .Values.config.message }}
+

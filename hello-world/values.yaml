@@ -1,0 +1,6 @@
+config:
+  appName: "hello-world"
+  appDescription: "A simple Helm chart that creates a Pod and ConfigMap"
+  appAuthor: "petercat-awesome"
+  appVersion: "1.0.0"
+  message: "version of deployed app is 1.0.0"

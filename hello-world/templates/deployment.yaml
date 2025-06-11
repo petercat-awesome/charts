@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world
+  template:
+    metadata:
+      labels:
+        app: hello-world
+    spec:
+      containers:
+        - name: hello-world
+          image: ghcr.io/petercat-awesome/hello-world:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: config-volume
+              mountPath: /tmp/config/app.properties
+              readOnly: true
+
+        # - name: configmap-reload
+        #   image: jimmidyson/configmap-reload:v0.5.0
+        #   args:
+        #     - --volume-dir=/etc/config
+        #     - --webhook-url=http://localhost:8080/-/reload
+        #   volumeMounts:
+        #     - name: config-volume
+        #       mountPath: /etc/config
+        #       readOnly: true
+
+      volumes:
+        - name: config-volume
+          configMap:
+            name: hello-config
